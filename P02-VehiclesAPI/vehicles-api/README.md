@@ -109,3 +109,11 @@ the Vehicle information to be presented
 ### Delete a Vehicle
 
 `DELETE` `/cars/{id}`
+
+
+### Swagger
+#### Doc
+`http://localhost:8080/v3/api-docs/`
+
+#### UI
+`http://localhost:8080/swagger-ui.html`

@@ -29,3 +29,14 @@ $ java -jar target/pricing-service-0.0.1-SNAPSHOT.jar
 ```
 
 It can also be imported in your IDE as a Maven project.
+
+#### H2
+
+- URL:
+
+`http://localhost:8082/h2`
+
+
+- JDBC URL:
+
+`jdbc:h2:mem:prices`

@@ -74,6 +74,7 @@ public class CarControllerTest {
      */
     @Test
     public void createCar() throws Exception {
+        System.out.println("#1 test");
         Car car = getCar();
         mvc.perform(post(new URI("/cars"))
                         .content(json.write(car).getJson())
@@ -88,6 +89,7 @@ public class CarControllerTest {
      */
     @Test
     public void listCars() throws Exception {
+        System.out.println("#2 test");
 		mvc.perform(get(new URI("/cars"))                        
 					.accept(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(status().isOk())
@@ -101,6 +103,7 @@ public class CarControllerTest {
      */
     @Test
     public void findCar() throws Exception {
+        System.out.println("#3 test");
         Car car = getCar();
         mvc.perform(get(new URI("/cars/".concat(String.valueOf(car.getId()))))
                         .accept(MediaType.APPLICATION_JSON_UTF8))
@@ -109,6 +112,21 @@ public class CarControllerTest {
 				.andExpect(jsonPath("$.id", is(car.getId().intValue())))
 				.andExpect(jsonPath("$.details.body", is(car.getDetails().getBody())));
     }
+    /**
+     * Tests Update single car by ID.
+     * @throws Exception if the Update operation of a single car fails
+     */
+    @Test
+    public void updateCar() throws Exception {
+        System.out.println("#4 test");
+        Car car = getCar();
+        car.setCondition(Condition.NEW);
+        mvc.perform(post(new URI("/cars"))
+                        .content(json.write(car).getJson())
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isCreated());
+    }
 
     /**
      * Tests the deletion of a single car by ID.
@@ -116,6 +134,7 @@ public class CarControllerTest {
      */
     @Test
     public void deleteCar() throws Exception {
+        System.out.println("#5 test");
         Car car = getCar();
         mvc.perform(delete(new URI("/cars/".concat(String.valueOf(car.getId())))))
                 .andExpect(status().isNoContent());

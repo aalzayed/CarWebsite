@@ -25,6 +25,8 @@ public class PricingController {
     @GetMapping
     public Price get(@RequestParam Long vehicleId) {
         try {
+            System.out.println("GET Price");
+
             return PricingService.getPrice(vehicleId);
         } catch (PriceException ex) {
             throw new ResponseStatusException(

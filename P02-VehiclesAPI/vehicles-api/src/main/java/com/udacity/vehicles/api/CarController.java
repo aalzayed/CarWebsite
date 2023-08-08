@@ -39,6 +39,7 @@ class CarController {
 	 */
 	@GetMapping
 	Resources<Resource<Car>> list() {
+		System.out.println("list GET");
 		List<Resource<Car>> resources = carService.list().stream()
 				.map(assembler::toResource)
 				.collect(Collectors.toList());
@@ -53,6 +54,8 @@ class CarController {
 	 */
 	@GetMapping("/{id}")
 	Resource<Car> get(@PathVariable Long id) {
+
+		System.out.println("ID GET");
 		return assembler.toResource(carService.findById(id));
 	}
 
@@ -65,6 +68,7 @@ class CarController {
 	 */
 	@PostMapping
 	ResponseEntity<?> post(@Valid @RequestBody Car car) throws URISyntaxException {
+		System.out.println("Add POST");
 		Resource<Car> resource = assembler.toResource(carService.save(car));
 		return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
 	}
@@ -78,6 +82,8 @@ class CarController {
 	 */
 	@PutMapping("/{id}")
 	ResponseEntity<?> put(@PathVariable Long id, @Valid @RequestBody Car car) {
+		System.out.println("Update PUT");
+
 		car.setId(id);
 		Resource<Car> resource = assembler.toResource(carService.save(car));
 		return ResponseEntity.ok(resource);
@@ -91,6 +97,8 @@ class CarController {
 	 */
 	@DeleteMapping("/{id}")
 	ResponseEntity<?> delete(@PathVariable Long id) {
+		System.out.println("DELETE");
+
 		carService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
